@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pensamento Computacional e Lógica com Scratch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a1a;
+            color: #e0e0e0;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .cyber-glow {
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 10px rgba(0, 255, 255, 0.5), 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        .cyber-border {
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1) inset, 0 0 5px rgba(0, 255, 255, 0.2);
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 0;
+            font-size: 0.875rem;
+        }
+        .nav-link:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: #00ffff;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover:before, .nav-link.active:before {
+            width: 100%;
+        }
+        .content-section {
+            border-left: 2px solid #00ffff;
+            padding-left: 2rem;
+            margin-left: 1rem;
+            position: relative;
+        }
+        .content-section::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 12px; /* Adjusted for better alignment with h2 */
+            width: 16px;
+            height: 16px;
+            background-color: #00ffff;
+            border-radius: 50%;
+            border: 2px solid #0a0a1a;
+            box-shadow: 0 0 10px #00ffff;
+        }
+        .card {
+            background-color: rgba(17, 24, 39, 0.5);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            border-color: rgba(0, 255, 255, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.1);
+        }
+        .code-block {
+            background-color: #0c0c1f;
+            border-left: 4px solid #00ffff;
+            padding: 1rem;
+            font-family: monospace;
+            color: #a7f3d0;
+            border-radius: 0 8px 8px 0;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-300">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50 cyber-border border-b">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-cyan-400 cyber-glow">Guia Scratch</h1>
+            <div class="hidden lg:flex space-x-4">
+                <a href="#intro" class="nav-link hover:text-cyan-400">Cap. 1</a>
+                <a href="#scratch" class="nav-link hover:text-cyan-400">Cap. 2</a>
+                <a href="#logica" class="nav-link hover:text-cyan-400">Cap. 3</a>
+                <a href="#pilares" class="nav-link hover:text-cyan-400">Cap. 4</a>
+                <a href="#projetos" class="nav-link hover:text-cyan-400">Cap. 5</a>
+                <a href="#estrategias" class="nav-link hover:text-cyan-400">Cap. 6</a>
+                <a href="#desafios" class="nav-link hover:text-cyan-400">Cap. 7</a>
+                <a href="#alem" class="nav-link hover:text-cyan-400">Cap. 8</a>
+                <a href="#apendices" class="nav-link hover:text-cyan-400">Apêndices</a>
+            </div>
+            <button id="mobile-menu-button" class="lg:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden px-6 pb-4">
+            <a href="#intro" class="block py-2 text-center hover:bg-gray-800 rounded">Cap. 1: Introdução</a>
+            <a href="#scratch" class="block py-2 text-center hover:bg-gray-800 rounded">Cap. 2: Conhecendo o Scratch</a>
+            <a href="#logica" class="block py-2 text-center hover:bg-gray-800 rounded">Cap. 3: Lógica</a>
+            <a href="#pilares" class="block py-2 text-center hover:bg-gray-800 rounded">Cap. 4: Aplicando os Pilares</a>
+            <a href="#projetos" class="block py-2 text-center hover:bg-gray-800 rounded">Cap. 5: Projetos Práticos</a>
+            <a href="#estrategias" class="block py-2 text-center hover:bg-gray-800 rounded">Cap. 6: Estratégias Pedagógicas</a>
+            <a href="#desafios" class="block py-2 text-center hover:bg-gray-800 rounded">Cap. 7: Desafios e Soluções</a>
+            <a href="#alem" class="block py-2 text-center hover:bg-gray-800 rounded">Cap. 8: Além do Scratch</a>
+            <a href="#apendices" class="block py-2 text-center hover:bg-gray-800 rounded">Apêndices</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6 md:p-12">
+        
+        <div class="text-center mb-20">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 cyber-glow">Pensamento Computacional e Lógica com Scratch</h1>
+            <p class="text-lg md:text-xl text-cyan-400">Um guia educacional completo para sua jornada na programação criativa.</p>
+            <p class="mt-2 text-sm text-gray-500">Autoria: Igor Alexandre da Silva Santos</p>
+        </div>
+
+        <!-- Section: Introdução ao Pensamento Computacional -->
+        <section id="intro" class="mb-20">
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-white mb-6">Capítulo 1: Introdução ao Pensamento Computacional</h2>
+                <h3 class="text-2xl font-semibold text-cyan-400 mb-4">1.1 O que é Pensamento Computacional?</h3>
+                <p class="mb-6">É uma abordagem para resolver problemas que se assemelha à forma como os cientistas da computação abordam desafios complexos. Não se trata de programar, mas de pensar como um computador, utilizando conceitos para formular e solucionar problemas de maneira eficiente e lógica.</p>
+                <blockquote class="cyber-border border-l-4 border-cyan-400 pl-4 py-2 my-6">
+                    <p>"Pensamento Computacional é o processo de pensamento envolvido na formulação de um problema e na expressão de sua solução de forma que um computador - humano ou máquina - possa efetivamente realizar."</p>
+                </blockquote>
+                
+                <h3 class="text-2xl font-semibold text-cyan-400 mb-6">1.2 Os Quatro Pilares</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="card p-6 rounded-lg"><h4 class="font-bold text-xl text-white mb-2">Decomposição</h4><p class="text-gray-400">Quebrar um problema em partes menores.</p></div>
+                    <div class="card p-6 rounded-lg"><h4 class="font-bold text-xl text-white mb-2">Reconhecimento de Padrões</h4><p class="text-gray-400">Identificar similaridades e tendências.</p></div>
+                    <div class="card p-6 rounded-lg"><h4 class="font-bold text-xl text-white mb-2">Abstração</h4><p class="text-gray-400">Focar nos detalhes importantes.</p></div>
+                    <div class="card p-6 rounded-lg"><h4 class="font-bold text-xl text-white mb-2">Algoritmos</h4><p class="text-gray-400">Criar sequências de passos lógicos.</p></div>
+                </div>
+
+                <h3 class="text-2xl font-semibold text-cyan-400 mb-4">1.3 Importância na Educação e BNCC</h3>
+                <p class="mb-6">A inclusão do Pensamento Computacional na educação, inclusive na Base Nacional Comum Curricular (BNCC), é crucial para preparar os alunos para os desafios do futuro. Desenvolve resolução de problemas, pensamento crítico, criatividade e colaboração. Contribui para o desenvolvimento cognitivo, estimulando a análise, organização de ideias, formulação de hipóteses e a busca por soluções inovadoras.</p>
+            </div>
+        </section>
+
+        <!-- Section: Conhecendo o Scratch -->
+        <section id="scratch" class="mb-20">
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-white mb-6">Capítulo 2: Conhecendo o Scratch</h2>
+                <p class="mb-6">Lançado em 2007 pelo MIT, o Scratch é uma linguagem de programação visual gratuita e multiplataforma, projetada para ser divertida e acessível, especialmente para iniciantes, através de sua interface de blocos de arrastar e soltar.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-cyan-400 mb-4">2.3 Interface e Ambiente</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-400">
+                            <li><span class="font-semibold text-white">Palco:</span> Onde os projetos são executados.</li>
+                            <li><span class="font-semibold text-white">Sprites:</span> Personagens ou objetos programáveis.</li>
+                            <li><span class="font-semibold text-white">Área de Blocos:</span> Categorias de blocos de código.</li>
+                            <li><span class="font-semibold text-white">Área de Scripts:</span> Onde você monta os programas.</li>
+                        </ul>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="text-2xl font-semibold text-cyan-400 mb-4">2.5 Primeiros Passos</h3>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-400">
+                            <li>Acesse o site e clique em "Criar".</li>
+                            <li>Explore a interface.</li>
+                            <li>Adicione um Sprite e um Cenário.</li>
+                            <li>Arraste blocos para a área de scripts.</li>
+                            <li>Teste seu projeto clicando na bandeira verde.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Fundamentos da Lógica de Programação -->
+        <section id="logica" class="mb-20">
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-white mb-6">Capítulo 3: Fundamentos da Lógica de Programação</h2>
+                <div class="space-y-8">
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-2">3.1 Sequência</h3>
+                        <p class="text-gray-400">Execução de instruções em ordem específica. A ordem dos blocos é crucial.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-2">3.2 Seleção (Condicionais)</h3>
+                        <p class="text-gray-400">Permite que o programa tome decisões com base em condições, usando blocos como `se...então` e `se...então...senão`.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-2">3.3 Repetição (Loops)</h3>
+                        <p class="text-gray-400">Executa um conjunto de instruções várias vezes, usando blocos como `repita [10] vezes` e `sempre`.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-2">3.4 Variáveis e Dados</h3>
+                        <p class="text-gray-400">Espaços na memória para armazenar informações que podem mudar, como uma pontuação em um jogo.</p>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-2">3.5 Eventos e Interatividade</h3>
+                        <p class="text-gray-400">Ações que desencadeiam a execução de um script (ex: clicar na bandeira verde, pressionar uma tecla), tornando os programas interativos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Aplicando os Pilares no Scratch -->
+        <section id="pilares" class="mb-20">
+             <div class="content-section">
+                <h2 class="text-3xl font-bold text-white mb-6">Capítulo 4: Aplicando os Pilares no Scratch</h2>
+                <p class="mb-8">No Scratch, os pilares do Pensamento Computacional são aplicados de forma natural e prática durante a criação de projetos.</p>
+                <div class="space-y-6">
+                    <p><strong class="text-cyan-400 text-lg">4.1 Decomposição:</strong> Dividir um jogo de labirinto em partes: movimento do personagem, detecção de colisões e objetivo do jogo.</p>
+                    <p><strong class="text-cyan-400 text-lg">4.2 Reconhecimento de Padrões:</strong> Em um jogo onde vários objetos caem do céu, o padrão de movimento (começar no topo, cair, voltar ao topo) pode ser reutilizado para todos os objetos.</p>
+                    <p><strong class="text-cyan-400 text-lg">4.3 Abstração:</strong> Criar um bloco personalizado (Meus Blocos) para uma ação complexa, como "pular", abstrai os detalhes internos do movimento.</p>
+                    <p><strong class="text-cyan-400 text-lg">4.4 Algoritmos:</strong> Um script para desenhar um quadrado é um algoritmo claro e sequencial.</p>
+                    <div class="code-block">
+                        <span class="text-gray-500">// Algoritmo para desenhar um quadrado</span><br>
+                        repita [4] vezes<br>
+                        &nbsp;&nbsp;mova [100] passos<br>
+                        &nbsp;&nbsp;gire [90] graus
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Projetos Práticos e Metodologias -->
+        <section id="projetos" class="mb-20">
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-white mb-6">Capítulo 5: Projetos Práticos e Metodologias</h2>
+                <p class="mb-6">Aprender é mais eficaz quando os alunos constroem algo significativo. A metodologia **Construcionista** e a **Aprendizagem Baseada em Projetos (ABP)** são ideais para o Scratch.</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="card p-6 rounded-lg"><h4 class="font-bold text-xl text-white mb-2">Animação Simples</h4><p class="text-gray-400">Use blocos de movimento e aparência para criar uma animação básica.</p></div>
+                    <div class="card p-6 rounded-lg"><h4 class="font-bold text-xl text-white mb-2">Jogo de Perguntas</h4><p class="text-gray-400">Crie um quiz interativo usando variáveis e condicionais para verificar respostas.</p></div>
+                    <div class="card p-6 rounded-lg"><h4 class="font-bold text-xl text-white mb-2">Simulação Matemática</h4><p class="text-gray-400">Visualize conceitos como a tabuada ou progressões aritméticas.</p></div>
+                    <div class="card p-6 rounded-lg"><h4 class="font-bold text-xl text-white mb-2">História Interativa</h4><p class="text-gray-400">Desenvolva uma narrativa com múltiplos finais baseada nas escolhas do usuário.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Estratégias Pedagógicas para Educadores -->
+        <section id="estrategias" class="mb-20">
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-white mb-6">Capítulo 6: Estratégias Pedagógicas para Educadores</h2>
+                <p class="mb-6">Integrar o Scratch na sala de aula requer estratégias para garantir um aprendizado eficaz e engajador.</p>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-2">6.1 Como Introduzir</h3>
+                        <p class="text-gray-400">Comece com o básico, permita a exploração livre, proponha desafios, incentive o trabalho em grupo e conecte com o cotidiano dos alunos.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-2">6.2 Avaliação</h3>
+                        <p class="text-gray-400">Avalie o processo de resolução de problemas, a criatividade, a colaboração e a capacidade de depurar (corrigir erros), não apenas o código final. Incentive a criação de um portfólio de projetos.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-2">6.3 Adaptações e Integração</h3>
+                        <p class="text-gray-400">Use o ScratchJr para crianças menores. Integre o Scratch com outras disciplinas como Matemática (simulações), Português (histórias interativas) e Ciências (modelos de ecossistemas).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Desafios e Soluções -->
+        <section id="desafios" class="mb-20">
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-white mb-6">Capítulo 7: Desafios e Soluções</h2>
+                <p class="mb-6">Encontrar desafios é parte do aprendizado. Superá-los desenvolve o pensamento crítico.</p>
+                 <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-2">7.1 Dificuldades Comuns</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-400">
+                            <li>Frustração com erros (bugs).</li>
+                            <li>Dificuldade em abstrair conceitos.</li>
+                            <li>Falta de ideias para projetos.</li>
+                            <li>Gerenciamento de projetos complexos.</li>
+                        </ul>
+                    </div>
+                    <div class="card p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-cyan-400 mb-2">7.3 Debugging: A Arte de Corrigir Erros</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-400">
+                           <li>Leia o código atentamente, bloco por bloco.</li>
+                           <li>Use blocos `diga` para exibir valores de variáveis.</li>
+                           <li>Teste pequenas partes do código de cada vez.</li>
+                           <li>Peça a um colega para revisar seu código.</li>
+                           <li>Seja paciente e persistente!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Além do Scratch -->
+        <section id="alem" class="mb-20">
+             <div class="content-section">
+                <h2 class="text-3xl font-bold text-white mb-6">Capítulo 8: Além do Scratch</h2>
+                <p class="mb-8">O Scratch é um excelente ponto de partida. A jornada na programação pode continuar com outras linguagens e levar a diversas carreiras em tecnologia.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-cyan-400 mb-4">Próximos Passos na Programação</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-400">
+                            <li><span class="font-semibold text-white">Linguagens Visuais:</span> App Inventor, MakeCode.</li>
+                            <li><span class="font-semibold text-white">Linguagens Textuais:</span> Python, JavaScript, Java, C#.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-cyan-400 mb-4">Carreiras em Tecnologia</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-400">
+                            <li>Desenvolvedor de Software</li>
+                            <li>Cientista de Dados</li>
+                            <li>Engenheiro de IA/Machine Learning</li>
+                            <li>Desenvolvedor Web</li>
+                            <li>Engenheiro de Robótica</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section: Apêndices -->
+        <section id="apendices" class="mb-20">
+            <div class="content-section">
+                <h2 class="text-3xl font-bold text-white mb-6">Apêndices</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-cyan-400 mb-4">A. Glossário de Termos</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-400">
+                            <li><span class="font-semibold text-white">Algoritmo:</span> Sequência de passos para resolver um problema.</li>
+                            <li><span class="font-semibold text-white">Bug:</span> Erro em um programa.</li>
+                            <li><span class="font-semibold text-white">Debugging:</span> Processo de encontrar e corrigir erros.</li>
+                            <li><span class="font-semibold text-white">Sprite:</span> Personagem ou objeto programável no Scratch.</li>
+                        </ul>
+                    </div>
+                     <div>
+                        <h3 class="text-2xl font-semibold text-cyan-400 mb-4">B. Recursos Online</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-400">
+                            <li><a href="https://scratch.mit.edu/" target="_blank" class="hover:text-cyan-400 underline">Site Oficial do Scratch</a></li>
+                            <li><a href="https://www.scratchjr.org/" target="_blank" class="hover:text-cyan-400 underline">ScratchJr</a></li>
+                            <li><a href="https://scratched.gse.harvard.edu/" target="_blank" class="hover:text-cyan-400 underline">ScratchEd (para educadores)</a></li>
+                            <li><a href="https://code.org/" target="_blank" class="hover:text-cyan-400 underline">Code.org</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="cyber-border border-t bg-gray-900">
+        <div class="container mx-auto p-6 text-center text-gray-500">
+            <p>Site criado com base no guia "Pensamento Computacional e Lógica com Scratch".</p>
+            <p>Autoria do Guia: Igor Alexandre da Silva Santos.</p>
+            <p>&copy; 2025 - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        const mobileLinks = mobileMenu.getElementsByTagName('a');
+        for (let link of mobileLinks) {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        }
+
+        // Active nav link highlighting on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active', 'text-cyan-400');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active', 'text-cyan-400');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
